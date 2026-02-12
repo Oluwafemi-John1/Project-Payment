@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+const nodemailer = require('nodemailer')
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "oyeniranoluwafemi36@gmail.com",
+        pass: process.env.GOOGLE_APP_PASSWORD, // The 16-character App Password
+    },
+});
+
+const Mailing = (req, res) => {
+    (async () => {
+        const info = await transporter.sendMail({
+            from: '"Your Conscience Awaits!" <devfemi3@gmail.com>',
+            to: "devfemi3@gmail.com, aremumiriam08@gmail.com, toniaoluwarantimi@gmail.com, janetoduleke17@gmail.com",
+            subject: "Will you die or live? ❌",
+            // text: "Hello world?", // Plain-text version of the message
+            html: `
+                <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +36,7 @@
 
                     <!-- Header -->
                     <tr>
-                        <td style="background: #667eea; padding: 50px 40px; text-align: center;">
+                        <td style="background: #4462ec; padding: 50px 40px; text-align: center;">
                             <h1
                                 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 300; letter-spacing: 2px; text-transform: uppercase;">
                                 Your Conscience</h1>
@@ -115,7 +132,7 @@
                                 Your journey of self-discovery is uniquely yours.<br />Embrace it with courage and
                                 compassion.
                             </p>
-                            <a href="#"
+                            <a href="https://evento-femi.vercel.app"
                                 style="display: inline-block; padding: 15px 40px; background: #667eea; color: #ffffff; text-decoration: none; border-radius: 50px; font-size: 16px; font-weight: 600; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
                                 Begin Your Reflection
                             </a>
@@ -132,8 +149,8 @@
                             </p>
                             <p style="margin: 15px 0 0 0; color: #999999; font-size: 12px;">
                                 You're receiving this because you subscribed to our reflections.<br />
-                                <a href="#" style="color: #667eea; text-decoration: none;">Unsubscribe</a> |
-                                <a href="#" style="color: #667eea; text-decoration: none;">Update Preferences</a>
+                                <a href="https://evento-femi.vercel.app/login" style="color: #667eea; text-decoration: none;">Unsubscribe</a> |
+                                <a href="https://evento-femi.vercel.app/login" style="color: #667eea; text-decoration: none;">Update Preferences</a>
                             </p>
                             <p style="margin: 15px 0 0 0; color: #cccccc; font-size: 11px;">
                                 © 2026 Your Conscience. All rights reserved.
@@ -148,3 +165,12 @@
 </body>
 
 </html>
+            `
+        });
+
+        console.log("Message sent:", info.messageId);
+        res.json({ messageSent: info.messageId });
+    })();
+}
+
+module.exports = { Mailing }
