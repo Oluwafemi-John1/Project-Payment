@@ -1,9 +1,6 @@
 const https = require('https')
 require('dotenv').config()
 const app = require('express')()
-
-
-
 // console.log(params);
 
 

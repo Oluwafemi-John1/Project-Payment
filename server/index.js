@@ -20,6 +20,13 @@ app.use(express.json())
 app.get('/', (req, res)=>{
     res.send('Hello World')
 })
+
+app.post('/info', (req, res)=>{    
+    const { name, email, password } = req.body
+    const details = {name, email, password}
+    res.status(201).json({status: true, message: details})
+})
+
 app.get('/yes', testing)
 app.post('/pay', payMoney)
 
