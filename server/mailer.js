@@ -1,11 +1,29 @@
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    // service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
         user: "oyeniranoluwafemi36@gmail.com",
         pass: process.env.GOOGLE_APP_PASSWORD, // The 16-character App Password
     },
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 10000,
 });
+
+// const transporter = nodemailer.createTransport({
+//     host: "smtp.gmail.com", // or your specific provider host
+//     port: 465,
+//     secure: true, // true for 465, false for 587
+//     auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS,
+//     },
+//     // Add this to help with timeouts
+//     connectionTimeout: 10000, // 10 seconds
+//     greetingTimeout: 10000,
+// });
 
 const Mailing = (req, res) => {
     (async () => {
