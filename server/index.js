@@ -6,6 +6,7 @@ const cors = require('cors')
 const { testing, payMoney } = require('./paystack')
 const { Mailing } = require('./mailer')
 const { sendResend } = require('./resend')
+const { uploadMedia } = require('./cloud')
 // Variable Declarations
 const PORT = process.env.port || 5002
 
@@ -21,6 +22,7 @@ app.use(express.json())
 
 app.get('/sendmail', Mailing)
 app.get('/resend', sendResend)
+app.post('/media', uploadMedia)
 
 // Routes
 app.get('/', (req, res) => {

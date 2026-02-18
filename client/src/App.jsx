@@ -1,11 +1,31 @@
 import React from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 import PaystackPop from '@paystack/inline-js'
-// import { useState } from 'react'
+import { useState } from 'react'
 import "./App.css"
 import Forms from './Forms'
 
 const App = () => {
+    const url = 'http://localhost:5456/media'
+    const [mediafile, setmediafile] = useState('')
+
+    const uploadFile = () => {
+        const file = mediafile[0].name
+        console.log(file);
+        
+        const data = {
+            file: file,
+            date: new Date().toLocaleDateString()
+        }
+        console.log(data);
+        axios.post(url, data)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     // const endpoint = 'http://localhost:5456/'
     // const endpoint2 = 'http://localhost:5456/pay'
     // // const endpoint3 = 'http://localhost:5456/yes'
@@ -81,7 +101,9 @@ const App = () => {
                 
                 </div>
             </div>: null} */}
-            <Forms/>
+            <Forms />
+            <input type="file" onChange={(e) => { setmediafile(e.target.files) }} />
+            <button onClick={uploadFile}>Upload</button>
         </>
     )
 }
