@@ -15,7 +15,11 @@ const PORT = process.env.port || 5002
 // require('./paystack')
 
 // Middleware
-app.use(cors())
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
 app.use(express.json())
 
 
@@ -30,8 +34,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/info', (req, res) => {
-    const { name, email, password } = req.body
-    const details = { name, email, password }
+    const { name, email } = req.body
+    const details = { name, email }
     res.status(201).json({ status: true, message: details })
 })
 

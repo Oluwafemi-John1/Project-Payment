@@ -81,7 +81,7 @@ const Forms = () => {
                 <input
                     id="password"
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder="*******"
                     value={formik.values.password}
                     onChange={formik.handleChange}

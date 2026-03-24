@@ -10,7 +10,7 @@ const options = {
     path: '/transaction/initialize',
     method: 'POST',
     headers: {
-        Authorization: process.env.pay_secret,
+        Authorization: `Bearer ${process.env.pay_secret}`,
         'Content-Type': 'application/json'
     }
 }
